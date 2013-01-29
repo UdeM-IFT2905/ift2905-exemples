@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, JolisBoutonsActivity!</string>
+    <string name="app_name">JolisBoutons</string>
+    <string name="b1">Bouton de base\nAvec deux lignes.</string>
+
+<string name="b2">
+  <![CDATA[
+    <b>Auteur:</b> <big>Sébastien</big><br/>
+    <b>Contact:</b> moi@gmail.com<br/>
+    <i>Copyright © 2011-2012 UdeM</i>
+  ]]>
+</string> 
+
+</resources>
