@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -16,5 +16,17 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <style name="dayDataStyle" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#AAA</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+	</style>
+	
+    <style name="dayDataMoreStyle" parent="@style/dayDataStyle">
+        <item name="android:textSize">16sp</item>
+	</style>
 
 </resources>

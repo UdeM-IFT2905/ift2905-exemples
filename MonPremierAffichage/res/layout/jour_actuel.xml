@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/jourActuel"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="#000" >
+
+    <TextView
+        android:id="@+id/dayConditionNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="0dp"
+        android:paddingLeft="5dp"
+        android:shadowColor="#444"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:text="Apocalyptique"
+        android:textColor="#FFF"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/dayIconNow"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/dayConditionNow"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:src="@drawable/fire" />
+
+    <LinearLayout
+        android:id="@+id/dayDataNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/dayConditionNow"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/dayIconNow"
+        android:gravity="fill_vertical"
+        android:orientation="vertical" >
+
+	    <TextView
+	        android:id="@+id/dayDateNow"
+	        style="@style/dayDataStyle"
+	        android:text="21 décembre 2012" />
+	
+	    <TextView
+	        android:id="@+id/dayTemperaturesNow"
+	        style="@style/dayDataStyle"
+	        android:text="0&#176;C à 0&#176;C" />
+	
+	    <TextView
+	        android:id="@+id/dayMoreNow"
+	        style="@style/dayDataMoreStyle"
+	        android:layout_marginTop="2dp"
+	        android:text="Possibilité de pluie de météorites et tremblements de terre." />
+    
+    </LinearLayout>
+
+</RelativeLayout>

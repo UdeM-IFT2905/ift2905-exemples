@@ -1,12 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Le LinearLayout est l'un des layout les plus utilisés.
+Il permet d'afficher une suite d'éléments de façon linéaire,
+donc l'un après l'autre, selon une direction principale.
+En raison du peu de flexibilité de cette approche, les
+éléments d'un LinearLayout sont fréquemment d'autres
+layouts, permettant par exemple d'afficher une liste
+d'éléments statiques (on préférera un ListView pour
+les éléments dynamiques).
+
+On remarquera aussi l'utilisation des propriétés
+layout_width et layout_height, ainsi que background.
+Les deux premiers définissent la taille de l'élément.
+Comme le LinearLayout a comme parent l'activité
+elle-même, on utilisera généralement match_parent
+dans les deux directions, ce qui étendra l'élément
+pour prendre toute la place disponible dans le parent.
+On peut aussi utiliser wrap_content, qui prend la
+valeur minimale permettant à tout le contenu de rentrer,
+ou entrer une valeur numérique en pourcentages ou dp,
+une unité semblable au pixel mais conservant toujours
+la même taille physique peu importe le rapport entre la
+taille de l'écran et sa résolution.
+ 
+La propriété background est simplement une couleur de
+fond pour l'élément. Comme l'activité a par défaut
+un fond blanc, on peut souhaiter la changer pour
+quelque chose d'autre, souvent noir. -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#000" >
+    android:background="#000"
+    android:orientation="vertical" >
     
-    <include android:id="@+id/day1"
-        layout="@layout/jour"
+    <!-- Démonstration du principe d'inclusion de fichiers
+    de layout. On notera qu'on peut inclure plusieurs fois
+    le même layout, mais il sera alors impossible de distinguer
+    les deux copies, ce qui rend une telle utilisation
+    généralement peu pratique. -->
+    
+    <include android:id="@+id/dayNow"
+        layout="@layout/jour_actuel"
+        ></include>
+    
+    <include android:id="@+id/dayNext"
+        layout="@layout/jour_suivant"
+        ></include>
+    
+    <include android:id="@+id/dayNext"
+        layout="@layout/jour_suivant"
         ></include>
 
 </LinearLayout>

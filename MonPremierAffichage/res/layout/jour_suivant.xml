@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Le RelativeLayout est un peu plus complexe
+que le LinearLayout. Au lieu d'automatiquement
+ajouter les éléments un à la suite de l'autre,
+on peut spécifier des "relations" entre les
+éléments, permettant par exemple d'aligner
+les éléments par rapport à l'élément parent ou
+par rapport à d'autres éléments du RelativeLayout. -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/jourSuivant"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="#111" >
+    
+    <!-- Le View est en quelque sorte l'élément racine
+    de tous les autres éléments ?View. C'est un élément
+    sans spécificité, ne permettant pas d'afficher du
+    texte ou aucun autre contenu. Dans cet exemple,
+    on l'utilise comme séparateur en lui donnant comme fond
+    une image particulière. À noter que le View n'a pas
+    non plus de taille par défaut; wrap_content ne fonctionne
+    donc pas.
+    
+    Cet élément est un exemple des propriétés layout_alignParent*.
+    Ces propriétés sont utilisées pour aligner l'élément par
+    rapport au parent. alignParentLeft, par exemple, force
+    l'élément à toucher à la bordure gauche du parent. Si
+    plusieurs bordures opposées sont forcées, l'élément va
+    s'étirer pour respecter les conditions. -->
+    <View
+        android:id="@+id/daySeparator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:drawable/divider_horizontal_dark" />
+
+    <!-- Le ImageView permet d'afficher une image.
+    La différence entre l'utilisation de ce type de
+    View et un simple View avec un fond comme ci-haut
+    est que l'image d'un ImageView est conçue pour être
+    facilement remplacée, même durant l'exécution du
+    programme, ce qui en fait un élément plus utile
+    pour les images dépendant du contexte.
+    
+    Cet élément introduit aussi le concept de marge.
+    Une marge est un espace entre l'élément et
+    tous les autres éléments voisins ou, le cas échéant,
+    la bordure de l'élément parent. La marge permet
+    d'espacer les éléments les uns des autres, sans
+    affecter la taille de l'élément. La marge
+    peut être définie globalement ou par côté, et
+    les définitions plus précises ont préséance
+    sur la définition globale. -->
+    <ImageView
+        android:id="@+id/dayIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="20dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/fire" />
+
+    <!-- Le TextView, comme son nom l'indique,
+    permet d'afficher du texte. On notera ici
+    que le texte n'est pas éditable; plusieurs
+    autres APIs graphiques appellent de tels
+    éléments des "labels". On peut configurer
+    toutes sortes de propriétés assez logiques
+    comme la taille ou la couleur du texte.
+    Il est aussi possible d'afficher une ombre
+    avec une couleur, un décalage et un rayon
+    de flou particulier.
+    
+    Cet élément montre aussi l'usage de
+    toRightOf (il existe aussi toLeftOf,
+    above et below). De manière similaire
+    aux propriétés alignParent, elle force
+    l'élément à toucher le côté spécifié de
+    l'élément mentionné. Ceci permet des
+    layouts assez complexes et attrayants. -->
+    <TextView
+        android:id="@+id/dayCondition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/dayIcon"
+        android:text="Apocalyptique"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:shadowColor="#444"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1" />
+    
+    <!-- Les deux TextView suivants montrent
+    comment utiliser alignParentRight, toRightOf
+    et below pour aligner des éléments de texte
+    comme s'ils faisaient partie d'une liste.
+    
+    On notera que ceci n'est généralement pas
+    la meilleure manière de faire, car chaque
+    élément doit être configuré indépendamment. -->
+
+    <TextView
+        android:id="@+id/dayDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/dayIcon"
+        android:layout_below="@+id/dayCondition"
+        android:layout_marginBottom="2dp"
+        android:text="21 décembre 2012"
+        android:textColor="#AAA"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/dayTemperatures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/dayIcon"
+        android:layout_below="@+id/dayDate"
+        android:layout_marginBottom="2dp"
+        android:text="0&#176;C à 0&#176;C"
+        android:textColor="#AAA"
+        android:textSize="15sp" />
+
+</RelativeLayout>

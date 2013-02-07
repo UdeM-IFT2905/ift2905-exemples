@@ -14,6 +14,11 @@ import android.view.Menu;
  * sont introduits.
  * 
  * L'exemple est thématiquement centré sur une application météo.
+ * 
+ * 
+ * Les icônes sont une gracieuseté d'Antonis Theodorakis sous
+ * license CC BY-NC-ND 3.0.
+ * @see <a href="http://bit.ly/fR3wKk">Page Behance des icônes</a>
  *
  */
 
