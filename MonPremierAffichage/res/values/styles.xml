@@ -17,6 +17,12 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     
+    <!-- Un style d'élément utilise les mêmes propriétés que
+    l'élément le ferait autrement, mais la syntaxe est légèrement
+    différente. On notera l'existence d'un parent au style,
+    ce qui permet à plusieurs styles d'hériter les propriétés
+    d'un autre style. Une bonne structure de styles
+    permettra donc de réutiliser au maximum les mêmes définitions. -->
     <style name="dayDataStyle" parent="@android:style/Widget.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

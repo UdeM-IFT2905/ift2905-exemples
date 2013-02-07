@@ -33,6 +33,12 @@
         android:paddingRight="30dp"
         android:src="@drawable/fire" />
 
+    <!-- On voit ici un exemple plus avancé où
+    un LinearLayout est utilisé dans un RelativeLayout
+    pour plus facilement insérer une série de
+    TextViews verticalement. Ce genre de structure
+    est recommandé, car il est généralement plus
+    clair et concis tout en offrant un meilleur contrôle. -->
     <LinearLayout
         android:id="@+id/dayDataNow"
         android:layout_width="wrap_content"
@@ -45,6 +51,32 @@
         android:gravity="fill_vertical"
         android:orientation="vertical" >
 
+        <!-- Les trois TextView suivants utilisent le
+        concept de style. Un style est effectivement
+        une manière de réutiliser un ou plusieurs
+        paramètres dans plusieurs éléments différents.
+        Les styles sont définis dans les fichiers XML
+        de type "values". Dès que plusieurs éléments
+        réutilisent un certain nombre de propriétés
+        identiques, il est généralement plus approprié
+        d'utiliser un style.
+        
+        On remarquera aussi que le dernier TextView
+        définit d'autres propriétés. Un style n'est
+        que la "base" sur laquelle l'élément est
+        construit; on peut ajouter ou même
+        surclasser des valeurs existantes dans
+        le style en les redéfinissant dans l'élément,
+        permettant une plus grande flexibilité.
+        
+        Finalement, il est bon de se rappeler
+        que les styles, étant des valeurs, peuvent
+        dépendre de tous les qualificateurs
+        usuels tels la taille de l'écran,
+        l'orientation ou la langue, ce qui peut
+        permettre de mieux spécifier les styles
+        pour différents contextes sans devoir
+        reconstruire le layout lui-même. -->
 	    <TextView
 	        android:id="@+id/dayDateNow"
 	        style="@style/dayDataStyle"
