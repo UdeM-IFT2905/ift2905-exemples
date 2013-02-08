@@ -4,11 +4,35 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <TextView
+    <Button
+        android:id="@+id/bouton_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:padding="30dp"
+        android:text="Allez!" />
+
+    <TextView
+        android:id="@+id/activity_actuelle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center|center"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFF" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center|center"
+        android:text="Appuyer sur le bouton lancera une nouvelle activité avec un Listener différent."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFF" />
 
 </RelativeLayout>

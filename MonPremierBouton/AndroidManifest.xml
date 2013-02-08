@@ -14,13 +14,25 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="iro.ift2905.monpremierbouton.MainActivity"
+            android:name="iro.ift2905.monpremierbouton.AnonymousActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="iro.ift2905.monpremierbouton.ImplementsActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="iro.ift2905.monpremierbouton.InnerActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="iro.ift2905.monpremierbouton.ExternalActivity"
+            android:label="@string/app_name" >
         </activity>
     </application>
 
