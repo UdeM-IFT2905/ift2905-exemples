@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="sunny">Ensoleillé</string>
+    <string name="cloudy">Nuageux</string>
+    <string name="freezing_rain">Verglas</string>
+    <string name="bad">Terrible</string>
+    
+    <string name="temp">%1$d&#176;C à %2$d&#176;C</string>
+    
+    <string name="sunny_desc">Ensoleillé toute la journée.</string>
+    <string name="cloudy_desc">Nuageux sans l\'ombre d\'un trou de ciel bleu.</string>
+    <string name="freezing_rain_desc">Gris et glissant voire venteux si vous n\'êtes pas chanceux.</string>
+    <string name="bad_desc">Fumeux avec probabilité de pluie de météorites et de tremblements de terre.</string>
+    
+    
+</resources>

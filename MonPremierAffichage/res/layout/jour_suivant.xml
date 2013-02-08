@@ -12,7 +12,7 @@ par rapport à d'autres éléments du RelativeLayout. -->
     android:id="@+id/jourSuivant"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="#111" >
+    android:background="#000" >
     
     <!-- Le View est en quelque sorte l'élément racine
     de tous les autres éléments ?View. C'est un élément

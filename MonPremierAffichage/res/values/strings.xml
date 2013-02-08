@@ -4,5 +4,17 @@
     <string name="app_name">MonPremierAffichage</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    
+    <string name="sunny">Sunny</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="freezing_rain">Freezing Rain</string>
+    <string name="bad">Terrible</string>
+    
+    <string name="temp">%1$d&#176;C to %2$d&#176;C</string>
+    
+    <string name="sunny_desc">Sunny for the whole day.</string>
+    <string name="cloudy_desc">Depressingly cloudy with not a scrap of blue sky.</string>
+    <string name="freezing_rain_desc">Gray and slippery, maybe even windy if you\'re unlucky.</string>
+    <string name="bad_desc">Smoky with chances of meteorite storm and earthquakes.</string>
 
 </resources>
