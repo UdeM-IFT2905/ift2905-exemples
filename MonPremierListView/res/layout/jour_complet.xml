@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/jourComplet"
+    android:layout_width="match_parent"
+    android:layout_height="100dp" >
+
+    <TextView
+        android:id="@+id/overrideText"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical"
+        android:text=""
+        android:textSize="30sp"
+        android:visibility="invisible" />
+    
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/jourCompletInner"
+	    android:layout_width="match_parent"
+	    android:layout_height="100dp" >
+    
+	    <TextView
+	        android:id="@+id/dayCondition"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginBottom="2dp"
+	        android:layout_marginTop="2dp"
+	        android:layout_toRightOf="@+id/dayIcon"
+	        android:shadowColor="#444"
+	        android:shadowDx="1"
+	        android:shadowDy="1"
+	        android:shadowRadius="1"
+	        android:text="Apocalyptique"
+	        android:textColor="#FFF"
+	        android:textSize="25sp"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/dayDate"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="false"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@+id/dayCondition"
+	        android:layout_marginBottom="2dp"
+	        android:layout_marginTop="5dp"
+	        android:layout_toRightOf="@+id/dayIcon"
+	        android:text="21 décembre 2012"
+	        android:textColor="#AAA"
+	        android:textSize="15sp" />
+	
+	    <TextView
+	        android:id="@+id/dayTemperatures"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="false"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@+id/dayDate"
+	        android:layout_marginBottom="2dp"
+	        android:layout_toRightOf="@+id/dayIcon"
+	        android:text="0°C à 0°C"
+	        android:textColor="#AAA"
+	        android:textSize="15sp" />
+	
+	    <ImageView
+	        android:id="@+id/dayIcon"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_alignParentBottom="true"
+	        android:layout_alignParentLeft="true"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="10dp"
+	        android:src="@drawable/fire" />
+	    
+	</RelativeLayout>
+
+</RelativeLayout>
