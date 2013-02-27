@@ -1,14 +1,61 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <TextView
+    <EditText
+        android:id="@+id/url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Entrez un URL..."
+        android:text="http://www.google.ca">
+        
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/urlSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:layout_gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Aller à cette page" />
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/streetAddress"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_vertical"
+        android:ems="10"
+        android:hint="Entrez une adresse..."
+        android:inputType="textPostalAddress"
+        android:text="1000 de la Gauchetière" />
+
+    <Button
+        android:id="@+id/addressSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Chercher cette adresse" />
+
+    <ImageButton
+        android:id="@+id/cameraButton"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:src="@android:drawable/ic_menu_camera" />
+
+</LinearLayout>
