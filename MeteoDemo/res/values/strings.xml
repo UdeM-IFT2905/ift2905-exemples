@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MeteoDemo</string>
+    <string name="titre">La météo</string>
+    <string name="ville">(ville)</string>
+    <string name="heure">(heure)</string>
+    <string name="temperature">100c</string>
+    <string name="actualiser">Mettre à jour</string>
+    <string name="conditions">(conditions)</string>
+</resources>
