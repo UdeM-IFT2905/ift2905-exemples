@@ -1,61 +1,66 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
-    android:orientation="vertical"
-    tools:context=".MainActivity" >
+    android:layout_height="wrap_content" >
 
-    <EditText
-        android:id="@+id/url"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Entrez un URL..."
-        android:text="http://www.google.ca">
-        
-        <requestFocus />
-    </EditText>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/urlSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="Aller à cette page" />
+        <EditText
+            android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Entrez un URL..."
+            android:text="http://www.google.ca" >
 
-    <EditText
-        android:id="@+id/streetAddress"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_vertical"
-        android:ems="10"
-        android:hint="Entrez une adresse..."
-        android:inputType="textPostalAddress"
-        android:text="1000 de la Gauchetière" />
+            <requestFocus />
+        </EditText>
 
-    <Button
-        android:id="@+id/addressSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="Chercher cette adresse" />
+        <Button
+            android:id="@+id/urlSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Aller à cette page" />
 
-    <ImageButton
-        android:id="@+id/cameraButton"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:src="@android:drawable/ic_menu_camera" />
+        <EditText
+            android:id="@+id/streetAddress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            android:ems="10"
+            android:hint="Entrez une adresse..."
+            android:inputType="textPostalAddress"
+            android:text="1000 de la Gauchetière" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/addressSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Chercher cette adresse" />
+
+        <ImageButton
+            android:id="@+id/cameraButton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:src="@android:drawable/ic_menu_camera" />
+    </LinearLayout>
+
+</ScrollView>

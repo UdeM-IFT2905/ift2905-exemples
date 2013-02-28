@@ -24,10 +24,12 @@ import android.widget.ImageButton;
  * pour retourner des données d'une activité appelée vers une
  * activité appelante est montrée.
  * 
+ * http://developer.android.com/reference/android/content/Intent.html
+ * 
  */
 
 public class MainActivity extends Activity {
-	
+
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
 	EditText url, streetAddress;
@@ -37,15 +39,15 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		url = (EditText)findViewById(R.id.url);
 		((Button)findViewById(R.id.urlSearch)).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Uri searchAddress = Uri.parse(url.getText().toString());
 				Intent search = new Intent(android.content.Intent.ACTION_VIEW, searchAddress);
-				
+
 				try
 				{
 					startActivity(search);
@@ -55,16 +57,16 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
-		
+
 		streetAddress = (EditText)findViewById(R.id.streetAddress);
 		((Button)findViewById(R.id.addressSearch)).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				String address = streetAddress.getText().toString().replace(' ', '+');
 				Uri searchAddress = Uri.parse("geo:0,0?q=" + address);
 				Intent search = new Intent(android.content.Intent.ACTION_VIEW, searchAddress);
-				
+
 				try
 				{
 					startActivity(search);
@@ -74,11 +76,11 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
-		
+
 		cameraButton = ((ImageButton)findViewById(R.id.cameraButton));
-		
+
 		cameraButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -92,15 +94,26 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+
+
+
+
 	}
 
+	public void call(String phone) {
+		Intent callIntent = new Intent(Intent.ACTION_CALL);          
+		callIntent.setData(Uri.parse("tel:"+phone));          
+		startActivity(callIntent);  
+	}
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
