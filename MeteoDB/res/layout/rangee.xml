@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="vertical">
+
+     <LinearLayout
+         android:id="@+id/linearLayout1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content" >
+
+         <TextView
+             android:id="@+id/rtemp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="10C"
+             android:textColor="#ffffff00"
+             android:textSize="24dp"
+             android:textStyle="bold" android:layout_weight="1"/>
+
+         <TextView
+             android:id="@+id/rcond"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="nuageux"
+             android:textSize="20dp" android:textColor="#ffffff00"/>
+
+     </LinearLayout>
+
+     <LinearLayout
+         android:id="@+id/linearLayout2"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent" >
+
+         <TextView
+             android:id="@+id/rheure"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="heure" android:textColor="#ff00ffff" android:layout_weight="1"/>
+
+         <TextView
+             android:id="@+id/rdepuis"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="depuis" android:textColor="#ff00ffff"/>
+     </LinearLayout>
+
+ </LinearLayout>
