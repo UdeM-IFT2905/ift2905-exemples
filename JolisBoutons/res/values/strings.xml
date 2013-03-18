@@ -5,12 +5,21 @@
     <string name="app_name">JolisBoutons</string>
     <string name="b1">Bouton de base\nAvec deux lignes.</string>
 
-<string name="b2">
-  <![CDATA[
-    <b>Auteur:</b> <big>Sébastien</big><br/>
-    <b>Contact:</b> moi@gmail.com<br/>
-    <i>Copyright © 2011-2012 UdeM</i>
-  ]]>
-</string> 
+    <!-- Cette ressource textuelle a la propriété
+    particulière d'être composée de code HTML. Pour
+    éviter que les balises HTML ne rentre en conflit
+    avec les balises XML du fichier, on utilise
+    le format <![CDATA[ ... ]]>, qui est interprété
+    par Android comme étant du "texte brut" et donc
+    qui n'est pas analysé pour y trouver des
+    balises. On peut aussi y utiliser les
+    caractères & et < sans devoir les encoder. -->
+	<string name="b2">
+	  <![CDATA[
+	    <b>Auteur:</b> <big>Sébastien</big><br/>
+	    <b>Contact:</b> moi@gmail.com<br/>
+	    <i>Copyright © 2011-2012 UdeM</i>
+	  ]]>
+	</string> 
 
 </resources>

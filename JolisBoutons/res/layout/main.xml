@@ -18,6 +18,15 @@
         android:layout_margin="5dp"
         android:text="rien pour l&apos;instant" />
 
+    <!-- Pour que le LinearLayout agisse comme
+    un bouton, on doit définir clickable et focusable
+    à "true". Pour conserver un langage visuel
+    approprié, on va aussi changer l'image de fond
+    à "@android:drawable/btn_default", ce qui donne
+    au LinearLayout l'apparence d'un bouton.
+    
+    Des éléments peuvent alors être ajoutés
+    au LinearLayout comme d'habitude. -->
     <LinearLayout
         android:id="@+id/bouton3"
         android:layout_width="fill_parent"
