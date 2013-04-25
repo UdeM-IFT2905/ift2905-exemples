@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -43,11 +44,8 @@ public class WeatherAdapter extends BaseAdapter {
 	
 	/**
 	 * 
-	 * Simple classe de stockage, elle permet deux
-	 * types de données : l'une stockant des informations
-	 * météo, et l'autre ne stockant que du texte, le
-	 * "override" qui, en quelque sorte, "surcharge" l'élément
-	 * pour n'afficher que du texte.
+	 * Simple classe de stockage, elle stocke des
+	 * informations météo.
 	 * 
 	 * On remarquera ici l'utilisation de propriétés
 	 * publiques finales, simplifiant de beaucoup
@@ -61,7 +59,6 @@ public class WeatherAdapter extends BaseAdapter {
 		public final int temperatureMin, temperatureMax, conditionID;
 		public final Date date;
 		public final String override;
-		public final boolean isOverriden;
 		
 		public WeatherData(int tmin, int tmax, int condition, Date d)
 		{
@@ -70,15 +67,6 @@ public class WeatherAdapter extends BaseAdapter {
 			conditionID = condition;
 			date = d;
 			override = "";
-			isOverriden = false;
-		}
-		
-		public WeatherData(String override)
-		{
-			this.override = override;
-			this.temperatureMax = this.temperatureMin = this.conditionID = 0;
-			this.date = null;
-			this.isOverriden = true;
 		}
 	}
 
@@ -185,15 +173,19 @@ public class WeatherAdapter extends BaseAdapter {
 	 * le mettre à false, sans quoi il sera impossible de créer le View.
 	 * 
 	 * Une fois le View créé (si nécessaire), on peut définir son
-	 * contenu. Ici, on a deux variantes : une prévision météo ou
-	 * du texte simple. Dans chaque cas, on prend les Views appropriés,
-	 * on les transforme en ImageView ou TextView et on définit les
-	 * valeurs comme à l'habitude. Cependant, pour afficher deux
-	 * versions différentes à l'aide d'un même layout, on va
-	 * cacher un ensemble d'éléments et en montrer un autre, selon
-	 * le cas. On pourrait aussi utiliser deux layouts différents,
-	 * mais cela devient beaucoup plus complexe et peut réduire
-	 * les performances lors du défilement.
+	 * contenu. Ici, on a simplement une prévision météo.
+	 * On prend les Views appropriés, on les transforme en ImageView
+	 * ou TextView et on définit les valeurs comme à l'habitude.
+	 * Ici, on charge les images du Web; on voudra donc les charger
+	 * de manière asynchrone pour éviter les ralentissements. On
+	 * utilise donc la librairie ImageUtil du cours pour facilement
+	 * charger les images utilisées dans une ListView : on
+	 * définit le Tag de chaque ImageView comme étant l'URL de
+	 * l'image, puis on ajoute l'ImageView à la liste interne
+	 * de chargement. Tout le processus se complète automatiquement
+	 * et supporte le recyclage sans autre considération. La librairie
+	 * supporte aussi l'usage d'une ProgressBar qui sera affichée lors
+	 * du chargement et cachée une fois l'image chargée.
 	 * 
 	 * Pour simplifier le processus, on a défini tous les éléments
 	 * de la prévision météo dans un même RelativeLayout. Il suffit
@@ -216,31 +208,18 @@ public class WeatherAdapter extends BaseAdapter {
 			view = inflater.inflate(R.layout.jour_complet, parent, false);
 		}
 		
-		if(_data.get(position).isOverriden)
-		{
-			TextView mainText = (TextView)view.findViewById(R.id.overrideText);
-			mainText.setText(data.override);
-			
-			mainText.setVisibility(View.VISIBLE);
-			view.findViewById(R.id.jourCompletInner).setVisibility(View.INVISIBLE);
-		}
-		else
-		{
-			Log.d("ListViewAvance", "Getting view");
-			TextView condition = (TextView)view.findViewById(R.id.dayCondition);
-			TextView date = (TextView)view.findViewById(R.id.dayDate);
-			TextView temperatures = (TextView)view.findViewById(R.id.dayTemperatures);
-			ImageView icon = (ImageView)view.findViewById(R.id.dayIcon);
-			icon.setTag(conditionIcons[data.conditionID]);
+		Log.d("ListViewAvance", "Getting view");
+		TextView condition = (TextView)view.findViewById(R.id.dayCondition);
+		TextView date = (TextView)view.findViewById(R.id.dayDate);
+		TextView temperatures = (TextView)view.findViewById(R.id.dayTemperatures);
+		ImageView icon = (ImageView)view.findViewById(R.id.dayIcon);
+		ProgressBar iconLoad = (ProgressBar)view.findViewById(R.id.dayIconLoad);
+		icon.setTag(conditionIcons[data.conditionID]);
 
-			condition.setText(conditionStrings[data.conditionID]);
-			date.setText(_df.format(data.date));
-			temperatures.setText(String.format(_context.getResources().getString(R.string.temp), data.temperatureMin, data.temperatureMax));
-			_imageUtil.addTask(icon);
-			
-			view.findViewById(R.id.overrideText).setVisibility(View.INVISIBLE);
-			view.findViewById(R.id.jourCompletInner).setVisibility(View.VISIBLE);
-		}
+		condition.setText(conditionStrings[data.conditionID]);
+		date.setText(_df.format(data.date));
+		temperatures.setText(String.format(_context.getResources().getString(R.string.temp), data.temperatureMin, data.temperatureMax));
+		_imageUtil.addTask(icon, iconLoad);
 		
 		if(position % 2 == 0)
 			view.setBackgroundColor(Color.argb(255, 20, 20, 20));

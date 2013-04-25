@@ -1,5 +1,7 @@
 package iro.ift2905.listviewimages;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -8,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class ImageUtil {
@@ -37,7 +40,19 @@ public class ImageUtil {
 	//
 
 	public static class ImageLoaderQueue {
-		private LinkedList<ImageView> tasks;
+		private class ImageAndLoader
+		{
+			public final ImageView iv;
+			public final ProgressBar pb;
+			
+			public ImageAndLoader(ImageView iv, ProgressBar pb)
+			{
+				this.iv = iv;
+				this.pb = pb;
+			}
+		}
+		
+		private LinkedList<ImageAndLoader> tasks;
 		private Thread thread;
 		private boolean running;
 		private Runnable internalRunnable;
@@ -59,7 +74,7 @@ public class ImageUtil {
 		}
 
 		public ImageLoaderQueue(Bitmap defaultBM) {
-			tasks = new LinkedList<ImageView>();
+			tasks = new LinkedList<ImageAndLoader>();
 			internalRunnable = new InternalRunnable();
 			cache = new HashMap<String, Bitmap>();
 
@@ -85,6 +100,9 @@ public class ImageUtil {
 		// On va charger l'url qui est dans gettag()
 		//
 		public void addTask(ImageView iv) {
+			addTask(iv, null);
+		}
+		public void addTask(ImageView iv, ProgressBar pb) {
 			if (iv == null)
 				return;
 			iv.setVisibility(View.INVISIBLE);
@@ -99,19 +117,25 @@ public class ImageUtil {
 			if (b != null) {
 				iv.setImageBitmap(b);
 				iv.setVisibility(View.VISIBLE);
+				if(pb != null)
+					pb.setVisibility(View.GONE);
 				return;
 			}
+			
+			if(pb != null)
+				pb.setVisibility(View.VISIBLE);
+			
 			// must load the image...
 			if (!running)
 				start();
 			synchronized (tasks) {
-				tasks.addLast(iv);
+				tasks.addLast(new ImageAndLoader(iv, pb));
 				tasks.notify(); // notify any waiting threads
 			}
 		}
 
 		// retourne le prochain imageview a traiter pour le thread interne
-		private ImageView getNextTask() {
+		private ImageAndLoader getNextTask() {
 			int s;
 			synchronized (tasks) {
 				s = tasks.size();
@@ -137,8 +161,8 @@ public class ImageUtil {
 		// boucle principale du thread interne
 		private void internalRun() {
 			while (running) {
-				final ImageView iv = getNextTask();
-				final String url = (String) iv.getTag();
+				final ImageAndLoader ivpb = getNextTask();
+				final String url = (String) ivpb.iv.getTag();
 				if (url == null)
 					continue;
 				// check cache again
@@ -148,109 +172,56 @@ public class ImageUtil {
 					tmp = cache.get(url);
 				}
 				if (tmp != null) {
-					// Log.d(ME, "in cache " + url);
 					// update the view
-					iv.post(new Runnable() {
+					ivpb.iv.post(new Runnable() {
 						public void run() {
-							if (((String) iv.getTag()).equals(url))
-								iv.setImageBitmap(tmp);
-							iv.setVisibility(View.VISIBLE);
+							if (((String) ivpb.iv.getTag()).equals(url))
+								ivpb.iv.setImageBitmap(tmp);
+							ivpb.iv.setVisibility(View.VISIBLE);
+							if(ivpb.pb != null)
+								ivpb.pb.setVisibility(View.GONE);
 						};
 					});
 					continue;
 				}
-				//Log.d(ME, "loading  " + url);
+				
+				Bitmap b = null;
 				try {
-					final Bitmap b = NetUtil.loadHttpImage(url);
-					// update UI thread... only if tag did not change
-					iv.post(new Runnable() {
-						public void run() {
-							if (((String) iv.getTag()).equals(url))
-								iv.setImageBitmap(b);
-							iv.setVisibility(View.VISIBLE);
-						};
-					});
-					// update cache
+					b = NetUtil.loadHttpImage(url);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+					b = null;
+				} catch (IOException e) {
+					e.printStackTrace();
+					b = null;
+				}
+				
+				// update cache
+				if(b != null)
+				{
 					synchronized (cache) {
 						cache.put(url, b);
 					}
-					// } catch (ClientProtocolException e) {
-					// } catch (IOException e) {
-					// } catch (IllegalStateException e) {
-				} catch (Exception e) {
-					//Log.d("imageutil","exception: "+e.getClass()+":"+e.getMessage());
-					if( e.getClass().equals(java.lang.SecurityException.class) ) {
-						Log.d("imageutil",e.getMessage());
-					}
-					// si on a un bitap par defaut, sinon on laisse invisible
-					if (defaultBM != null) {
-						iv.post(new Runnable() {
-							public void run() {
-								iv.setImageBitmap(defaultBM);
-								iv.setVisibility(View.VISIBLE);
-							};
-						});
-					}
 				}
+				
+				final Bitmap bf = b == null ? defaultBM : b;
+				
+				// update UI thread... only if tag did not change
+				ivpb.iv.post(new Runnable() {
+					public void run() {
+						if (((String) ivpb.iv.getTag()).equals(url))
+						{
+							if(bf != null)
+								ivpb.iv.setImageBitmap(bf);
+							else
+								ivpb.iv.setImageResource(android.R.drawable.stat_notify_error);
+						}
+						ivpb.iv.setVisibility(View.VISIBLE);
+						if(ivpb.pb != null)
+							ivpb.pb.setVisibility(View.GONE);
+					};
+				});
 			}
 		}
 	}
-
-	// //
-	// // loader asynchrone d'images...
-	// //
-	// // on suppose que le tag du ImageView est l'URL a lire.
-	// // si le view est recycle, ce n'est pas grave... on laisse tomber.
-	// //
-	// //
-	// //
-	// private class ImageLoadTask extends AsyncTask<String, String, Bitmap> {
-	// private final ImageView iv;
-	// private final String url;
-	//
-	// public ImageLoadTask(ImageView iv) {
-	// this.iv = iv;
-	// url = (String) iv.getTag();
-	// }
-	//
-	// @Override
-	// protected void onPreExecute() {
-	// if (url != null) {
-	// Log.d("asyncimage", "loading " + url);
-	// }
-	// }
-	//
-	// @Override
-	// protected Bitmap doInBackground(String... param) {
-	// if (url == null)
-	// return null;
-	// try {
-	// final Bitmap b = loadHttpImage(url);
-	// // iv.post(new Runnable() {
-	// // public void run() { iv.setImageBitmap(b); };
-	// // });
-	// return b;
-	// } catch (ClientProtocolException e) {
-	// } catch (IOException e) {
-	// }
-	// return null;
-	// }
-	//
-	// @Override
-	// protected void onPostExecute(Bitmap result) {
-	// Log.d("asyncimage", "done loading " + url);
-	// if (result == null)
-	// return;
-	// imageCache.rememberBitMap(url, result); // ne pas reloader 2 fois la
-	// // meme image
-	// String newurl = (String) iv.getTag();
-	// if (newurl.equals(url)) {
-	// iv.setImageBitmap(result);
-	// } else {
-	// Log.d("asyncimage", "recycled");
-	// }
-	// }
-	//
-	// }
-
 }
