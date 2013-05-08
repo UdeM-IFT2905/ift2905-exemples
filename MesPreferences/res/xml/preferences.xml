@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="prefs"
+    android:title="Preferences" >
+
+    <!--
+    <PreferenceCategory
+        android:key="sources"
+        android:layout="@layout/preferences_category"
+        android:title="Sources de nouvelles" >
+        <CheckBoxPreference
+            android:key="recherche"
+            android:title="Recherche" />
+        <CheckBoxPreference
+            android:key="enseignement"
+            android:title="Enseignement" />
+        <CheckBoxPreference
+            android:key="campus"
+            android:title="Campus" />
+        <CheckBoxPreference
+            android:key="international"
+            android:title="International" />
+        <CheckBoxPreference
+            android:key="culture"
+            android:title="Culture" />
+        <CheckBoxPreference
+            android:key="sports"
+            android:title="Sports" />
+        <CheckBoxPreference
+            android:key="multimedia"
+            android:title="Multimédia" />
+        <CheckBoxPreference
+            android:key="revue-de-presse"
+            android:title="Revue de presse" />
+    </PreferenceCategory>
+    -->
+    <PreferenceCategory
+        android:key="miseajour"
+        android:layout="@layout/preferences_category"
+        android:title="Mise à jour" >
+        <EditTextPreference
+            android:defaultValue="10"
+            android:key="savetime"
+            android:numeric="integer"
+            android:summary="À combiens de jours on remonte dans le passé?"
+            android:title="Persistance" />
+
+        <CheckBoxPreference
+            android:key="autoupdate"
+            android:summary="Mettre à jour automatiquement"
+            android:title="Automatique?" />
+
+        <EditTextPreference
+            android:defaultValue="15"
+            android:dependency="autoupdate"
+            android:key="intervallewifi"
+            android:numeric="integer"
+            android:summary="Quel intervalle (en minutes) entre les mises à jours, lorsque le WIFI est disponible?"
+            android:title="Intervalle (Wifi)" />
+        <EditTextPreference
+            android:defaultValue="90"
+            android:dependency="autoupdate"
+            android:key="intervallemobile"
+            android:numeric="integer"
+            android:summary="Quel intervalle (en minutes) entre les mises à jours, lorsque le WIFI n&apos;est pas disponible?"
+            android:title="Intervalle (pas de WIFI)" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="miseajour"
+        android:layout="@layout/preferences_category"
+        android:title="Test Boutons radios" >
+        <ListPreference
+            android:dialogTitle="Choisissez un fruit..."
+            android:entries="@array/fruits"
+            android:entryValues="@array/fruits"
+            android:key="fruit"
+            android:title="Fruit"
+            android:summary="Votre fruit prefere." />
+    </PreferenceCategory>
+
+</PreferenceScreen>
